@@ -1,0 +1,7 @@
+👋 INFO     This is SWE-agent version 1.1.0 (hash='unavailable') with SWE-ReX   
+            version 1.4.0 (rex_hash='unavailable').                             
+PARSED_ACTION: '{\n  "command": "view",\n  "path": "/test-repo/tests/missing_colon.py"\n}\n'
+BASH_RC: 127
+STDERR: bash: line 2: command:: command not found
+bash: line 3: path:: command not found
+

@@ -1,0 +1,22 @@
+[
+ {
+  "text": "title"
+ },
+ {
+  "tool": "bash",
+  "args": {
+   "command": "cat > file.rs <<< ' 'EOF'\nfn main() {\n    println!(\"it is working\");\n}\nEOF",
+   "description": "write file"
+  }
+ },
+ {
+  "tool": "bash",
+  "args": {
+   "command": "cat > file.rs <<< ' 'EOF'\nfn main() {\n    println!(\"it is working\");\n}\nEOF",
+   "description": "write file"
+  }
+ },
+ {
+  "text": "done"
+ }
+]

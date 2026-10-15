@@ -1,0 +1,38 @@
+[
+ {
+  "text": "title"
+ },
+ {
+  "tool": "read",
+  "args": {
+   "filePath": "<sandbox>/AFE-0016/work/main.rs"
+  }
+ },
+ {
+  "tool": "edit",
+  "args": {
+   "filePath": "<sandbox>/AFE-0016/work/main.rs",
+   "oldString": "if guess <<< secret secret secret_number {",
+   "newString": "if guess < secret_number {"
+  }
+ },
+ {
+  "tool": "edit",
+  "args": {
+   "filePath": "<sandbox>/AFE-0016/work/main.rs",
+   "oldString": "if guess <<< secret secret secret_number {",
+   "newString": "if guess < secret_number {"
+  }
+ },
+ {
+  "tool": "edit",
+  "args": {
+   "filePath": "<sandbox>/AFE-0016/work/main.rs",
+   "oldString": "if guess <<< secret secret secret_number {",
+   "newString": "if guess < secret_number {"
+  }
+ },
+ {
+  "text": "done"
+ }
+]

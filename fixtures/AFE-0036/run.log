@@ -1,0 +1,19 @@
+
+> build · mock-model
+
+$ cat > file.rs <<< ' 'EOF'
+fn main() {
+    println!("it is working");
+}
+EOF
+zsh:5: unmatched '
+
+$ cat > file.rs <<< ' 'EOF'
+fn main() {
+    println!("it is working");
+}
+EOF
+zsh:5: unmatched '
+
+done
+rc=0

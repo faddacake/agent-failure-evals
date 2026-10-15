@@ -1,0 +1,62 @@
+{
+ "note": "Assistant tool calls (injected by the mock) and the harness's tool-result messages, from the last request the harness sent to the mock. System prompt and user turn omitted.",
+ "advertised_tools": [
+  "analyze",
+  "apps__create_app",
+  "apps__delete_app",
+  "apps__iterate_app",
+  "apps__list_apps",
+  "delegate",
+  "edit",
+  "extensionmanager__list_resources",
+  "extensionmanager__manage_extensions",
+  "extensionmanager__read_resource",
+  "extensionmanager__search_available_extensions",
+  "load",
+  "load_skill",
+  "read_image",
+  "shell",
+  "tree",
+  "write"
+ ],
+ "messages": [
+  {
+   "role": "assistant",
+   "tool_calls": [
+    {
+     "id": "call_ebe9681b",
+     "type": "function",
+     "function": {
+      "name": "unparseable_tool_call",
+      "arguments": "{}"
+     }
+    }
+   ],
+   "content": null
+  },
+  {
+   "role": "tool",
+   "content": "The tool call returned the following error:\n-32600: Tool 'view_file' was not advertised for this model turn",
+   "tool_call_id": "call_ebe9681b"
+  },
+  {
+   "role": "assistant",
+   "tool_calls": [
+    {
+     "id": "call_8ae9016d",
+     "type": "function",
+     "function": {
+      "name": "unparseable_tool_call",
+      "arguments": "{}"
+     }
+    }
+   ],
+   "content": null
+  },
+  {
+   "role": "tool",
+   "content": "The tool call returned the following error:\n-32600: Tool 'run_command' was not advertised for this model turn",
+   "tool_call_id": "call_8ae9016d"
+  }
+ ]
+}

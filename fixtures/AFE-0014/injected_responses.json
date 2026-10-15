@@ -1,0 +1,24 @@
+[
+ {
+  "text": "title"
+ },
+ {
+  "tool": "read",
+  "args": {
+   "filePath": "<sandbox>/AFE-0014/work/big.py",
+   "limit": 90,
+   "offset": "2490"
+  }
+ },
+ {
+  "tool": "read",
+  "args": {
+   "filePath": "<sandbox>/AFE-0014/work/big.py",
+   "limit": 150,
+   "offset": "2400"
+  }
+ },
+ {
+  "text": "done"
+ }
+]

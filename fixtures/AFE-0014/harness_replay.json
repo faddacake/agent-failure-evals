@@ -1,0 +1,55 @@
+{
+ "note": "Assistant tool calls (injected by the mock) and the harness's tool-result messages, from the last request the harness sent to the mock. System prompt and user turn omitted.",
+ "advertised_tools": [
+  "bash",
+  "edit",
+  "glob",
+  "grep",
+  "read",
+  "skill",
+  "task",
+  "todowrite",
+  "webfetch",
+  "write"
+ ],
+ "messages": [
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_794111cb",
+     "type": "function",
+     "function": {
+      "name": "read",
+      "arguments": "{\"filePath\":\"<sandbox>/AFE-0014/work/big.py\",\"limit\":90,\"offset\":\"2490\"}"
+     }
+    }
+   ]
+  },
+  {
+   "role": "tool",
+   "tool_call_id": "call_794111cb",
+   "content": "The read tool was called with invalid arguments: SchemaError(Expected number | undefined, got \"2490\"\n  at [\"offset\"]).\nPlease rewrite the input so it satisfies the expected schema."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_275f6519",
+     "type": "function",
+     "function": {
+      "name": "read",
+      "arguments": "{\"filePath\":\"<sandbox>/AFE-0014/work/big.py\",\"limit\":150,\"offset\":\"2400\"}"
+     }
+    }
+   ]
+  },
+  {
+   "role": "tool",
+   "tool_call_id": "call_275f6519",
+   "content": "The read tool was called with invalid arguments: SchemaError(Expected number | undefined, got \"2400\"\n  at [\"offset\"]).\nPlease rewrite the input so it satisfies the expected schema."
+  }
+ ]
+}

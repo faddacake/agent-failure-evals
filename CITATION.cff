@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below."
+title: "Agent Failure Evals: Tool-Call Misuse v0.1"
+type: dataset
+authors:
+  - family-names: Harrelson
+    given-names: Ben
+version: "0.1"
+date-released: "2026-10-15"
+license: CC-BY-4.0
+url: "https://github.com/faddacake/agent-failure-evals"
+repository-code: "https://github.com/faddacake/agent-failure-evals"
+keywords:
+  - agents
+  - tool-use
+  - evals
+  - coding agents
+abstract: "25 real-world tool-call misuse cases from public GitHub issues on open-source coding agents, normalized with trajectories and pass/partial/fail rubrics."

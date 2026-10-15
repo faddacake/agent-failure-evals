@@ -1,0 +1,2 @@
+signature: (response: litellm.types.utils.ModelResponse, mcp_tool_names: list[str] | None = None) -> list[openhands.events.action.action.Action]
+EXCEPTION: FunctionCallNotExistsError | Tool execute_code is not registered. (arguments: {'code': 'print(1)'}). Please check the tool name and retry with an existing tool.

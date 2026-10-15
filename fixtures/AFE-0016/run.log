@@ -1,0 +1,12 @@
+
+> build · mock-model
+
+→ Read main.rs
+✗ Edit main.rs failed
+Error: Could not find oldString in the file. It must match exactly, including whitespace, indentation, and line endings.
+✗ Edit main.rs failed
+Error: Could not find oldString in the file. It must match exactly, including whitespace, indentation, and line endings.
+✗ Edit main.rs failed
+Error: Could not find oldString in the file. It must match exactly, including whitespace, indentation, and line endings.
+done
+rc=0

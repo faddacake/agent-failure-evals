@@ -1,0 +1,13 @@
+
+> build · mock-model
+
+✗ Read big.py failed [limit=90, offset=2490]
+Error: The read tool was called with invalid arguments: SchemaError(Expected number | undefined, got "2490"
+  at ["offset"]).
+Please rewrite the input so it satisfies the expected schema.
+✗ Read big.py failed [limit=150, offset=2400]
+Error: The read tool was called with invalid arguments: SchemaError(Expected number | undefined, got "2400"
+  at ["offset"]).
+Please rewrite the input so it satisfies the expected schema.
+done
+rc=0

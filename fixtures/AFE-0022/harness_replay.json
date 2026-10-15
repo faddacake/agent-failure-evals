@@ -1,0 +1,64 @@
+{
+ "note": "Assistant tool calls (injected by the mock) and the harness's tool-result messages, from the last request the harness sent to the mock. System prompt and user turn omitted.",
+ "advertised_tools": [
+  "read_file",
+  "grep_search",
+  "glob",
+  "write_file",
+  "edit"
+ ],
+ "messages": [
+  {
+   "role": "assistant",
+   "content": null,
+   "tool_calls": [
+    {
+     "id": "call_6ea5bf93",
+     "type": "function",
+     "function": {
+      "name": "edit_file_path",
+      "arguments": "{}"
+     }
+    }
+   ]
+  },
+  {
+   "role": "tool",
+   "tool_call_id": "call_6ea5bf93",
+   "content": [
+    {
+     "type": "text",
+     "text": "Tool \"edit_file_path\" not found in registry. Tools must use the exact names that are registered. Did you mean one of: \"edit\", \"write_file\", \"read_file\"?"
+    }
+   ]
+  },
+  {
+   "role": "assistant",
+   "content": null,
+   "tool_calls": [
+    {
+     "id": "call_d526171e",
+     "type": "function",
+     "function": {
+      "name": "edit_file_path",
+      "arguments": "{}"
+     }
+    }
+   ]
+  },
+  {
+   "role": "tool",
+   "tool_call_id": "call_d526171e",
+   "content": [
+    {
+     "type": "text",
+     "text": "Tool \"edit_file_path\" not found in registry. Tools must use the exact names that are registered. Did you mean one of: \"edit\", \"write_file\", \"read_file\"?"
+    }
+   ]
+  },
+  {
+   "role": "assistant",
+   "content": "done"
+  }
+ ]
+}

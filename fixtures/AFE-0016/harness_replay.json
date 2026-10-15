@@ -1,0 +1,93 @@
+{
+ "note": "Assistant tool calls (injected by the mock) and the harness's tool-result messages, from the last request the harness sent to the mock. System prompt and user turn omitted.",
+ "advertised_tools": [
+  "bash",
+  "edit",
+  "glob",
+  "grep",
+  "read",
+  "skill",
+  "task",
+  "todowrite",
+  "webfetch",
+  "write"
+ ],
+ "messages": [
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_e3e76915",
+     "type": "function",
+     "function": {
+      "name": "read",
+      "arguments": "{\"filePath\":\"<sandbox>/AFE-0016/work/main.rs\"}"
+     }
+    }
+   ]
+  },
+  {
+   "role": "tool",
+   "tool_call_id": "call_e3e76915",
+   "content": "<path><sandbox>/AFE-0016/work/main.rs</path>\n<type>file</type>\n<content>\n1: fn main() {\n2:     if guess << secret secret_number {\n3:     }\n4: }\n\n(End of file - total 4 lines)\n</content>"
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_9a880076",
+     "type": "function",
+     "function": {
+      "name": "edit",
+      "arguments": "{\"filePath\":\"<sandbox>/AFE-0016/work/main.rs\",\"oldString\":\"if guess <<< secret secret secret_number {\",\"newString\":\"if guess < secret_number {\"}"
+     }
+    }
+   ]
+  },
+  {
+   "role": "tool",
+   "tool_call_id": "call_9a880076",
+   "content": "Could not find oldString in the file. It must match exactly, including whitespace, indentation, and line endings."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_4f9b0e36",
+     "type": "function",
+     "function": {
+      "name": "edit",
+      "arguments": "{\"filePath\":\"<sandbox>/AFE-0016/work/main.rs\",\"oldString\":\"if guess <<< secret secret secret_number {\",\"newString\":\"if guess < secret_number {\"}"
+     }
+    }
+   ]
+  },
+  {
+   "role": "tool",
+   "tool_call_id": "call_4f9b0e36",
+   "content": "Could not find oldString in the file. It must match exactly, including whitespace, indentation, and line endings."
+  },
+  {
+   "role": "assistant",
+   "content": "",
+   "tool_calls": [
+    {
+     "id": "call_35d77690",
+     "type": "function",
+     "function": {
+      "name": "edit",
+      "arguments": "{\"filePath\":\"<sandbox>/AFE-0016/work/main.rs\",\"oldString\":\"if guess <<< secret secret secret_number {\",\"newString\":\"if guess < secret_number {\"}"
+     }
+    }
+   ]
+  },
+  {
+   "role": "tool",
+   "tool_call_id": "call_35d77690",
+   "content": "Could not find oldString in the file. It must match exactly, including whitespace, indentation, and line endings."
+  }
+ ]
+}

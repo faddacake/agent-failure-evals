@@ -1,0 +1,21 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Scope: original annotations in this dataset, including normalized case
+structure, trajectory tables as structured, expected/actual descriptions,
+rubrics, rationales, taxonomy, documentation, scripts and fixture metadata,
+© 2026 Ben Harrelson.
+
+You are free to share and adapt this material for any purpose, including
+commercially, provided you give appropriate credit, provide a link to the
+license, and indicate if changes were made.
+
+Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Not covered by this license:
+- Text of the linked GitHub issues, which belongs to their authors under
+  GitHub's Terms of Service. Cases link to the issues and quote only short
+  identifying excerpts. Cases AFE-0015, AFE-0028 and AFE-0035 contain no copied
+  issue text (original paraphrase, link-only attribution).
+- The source code of the referenced agent harnesses, which is under each
+  repository's own license (Apache-2.0 or MIT as recorded per case; none
+  detected for anthropics/claude-code).
