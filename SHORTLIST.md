@@ -77,3 +77,16 @@ AFE-0004, AFE-0011, AFE-0014, AFE-0016, AFE-0017, AFE-0019, AFE-0020, AFE-0022, 
 - **By repo:** openai/codex 6, anomalyco/opencode 6, anthropics/claude-code 3, google-gemini/gemini-cli 2, OpenHands 2, continue 1, cline 1, goose 1, qwen-code 1, kilocode 1, SWE-agent 1.
 - **By subtype:** wrong-args 15, nonexistent-tool 6, ignored-error 3, other 1. Ignored-error is underweight; source more of it in pass 3.
 - **By license:** Apache-2.0 12, MIT 10, paraphrase (link-only) 3, hold 0.
+
+## v0.2 additions (2026-10-21)
+Triaged from the 2026-10-21 weekly sweep (20 candidates: 7 accepted, 9 deferred, 4 rejected) against the same criteria, then approved for v0.2.
+
+| case_id | repo | subtype | severity | license | reason | caveats | repro-priority |
+|---|---|---|---|---|---|---|---|
+| AFE-0037 | aaif-goose/goose | ignored-error | medium | Apache-2.0 | No-op `edit` reported as success; model repeats it | repeat count not recorded; harness co-cause | y; repro: not attempted |
+| AFE-0038 | anomalyco/opencode | wrong-args | medium | MIT | Optional subagent `sessionID` filled with invented IDs; retried after not-found | model and retry count not recorded | y; repro: not attempted |
+| AFE-0039 | openai/codex | nonexistent-tool | medium | Apache-2.0 | Tool call emitted as compaction summary with no tools offered (20 of 119) | aggregate trace; model-specific | y; repro: not attempted |
+| AFE-0040 | QwenLM/qwen-code | wrong-args | medium | Apache-2.0 | `tool_call` envelope nested one level too deep; error misread, tool abandoned | no full transcript | y; repro: not attempted |
+| AFE-0041 | QwenLM/qwen-code | wrong-args | low | Apache-2.0 | Deferred `get_goal` called before schema review; one refusal, clean recovery | partial-band calibration case | n |
+| AFE-0042 | openai/codex | wrong-args | low | Apache-2.0 | `list_threads` limit above undocumented cap; recovers in one step | borderline scope (schema gap) | n |
+| AFE-0043 | anomalyco/opencode | nonexistent-tool | medium | MIT | Built-in `read` called as `tools.read` inside `execute`; several wasted turns | prompt wording co-cause; model not named | n |
