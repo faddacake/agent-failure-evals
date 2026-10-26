@@ -1,6 +1,6 @@
 ---
 license: cc-by-4.0
-pretty_name: Agent Failure Evals - Tool-Call Misuse v0.2.1
+pretty_name: Agent Failure Evals - Tool-Call Misuse v0.2.2
 language:
 - en
 task_categories:
@@ -21,18 +21,19 @@ configs:
     path: data/cases.jsonl
 ---
 
-# Agent Failure Evals: Tool-Call Misuse v0.2.1
+# Agent Failure Evals: Tool-Call Misuse v0.2.2
 
 ## Summary
-32 real-world failures where open-source **coding agents misused tool calls**. Each one comes from a public GitHub issue and is normalized into a single case with: the task, a step-level trajectory, expected vs. actual behavior, a failure category, and a gradeable pass / partial / fail rubric.
+31 real-world failures where open-source **coding agents misused tool calls**. Each one comes from a public GitHub issue and is normalized into a single case with: the task, a step-level trajectory, expected vs. actual behavior, a failure category, and a gradeable pass / partial / fail rubric.
 
-It is aimed at AI labs and agent-harness builders who want small, hand-checked regression cases for tool-calling reliability. This is an early release (v0.2.1, a correction release on top of v0.2: same 32 cases). Most trajectories are partial, and no case has been re-run against a model yet (see Caveats).
+It is aimed at AI labs and agent-harness builders who want small, hand-checked regression cases for tool-calling reliability. This is an early release (v0.2.2, a correction release on top of v0.2.1: 31 cases after one withdrawal). Most trajectories are partial, and no case has been re-run against a model yet (see Caveats).
 
 ## What's in it
 | Path | Contents |
 |---|---|
-| `data/cases.jsonl` | 32 cases, one JSON object per line (the canonical data) |
+| `data/cases.jsonl` | 31 cases, one JSON object per line (the canonical data) |
 | `cases/AFE-XXXX.md` | Human-readable version of each case |
+| `withdrawn/` | Retired case IDs with the reason for withdrawal (not part of the dataset) |
 | `SHORTLIST.md` | Selection record: chosen cases, excluded cases with reasons |
 | `SCORING.md` | How to grade an agent against the rubrics |
 | `scripts/validate.py` | Schema and enum validator |
@@ -40,7 +41,7 @@ It is aimed at AI labs and agent-harness builders who want small, hand-checked r
 | `fixtures/` | Replay files for the 8 harness-confirmed cases |
 | `LICENSE`, `CITATION.cff` | License and citation |
 
-Harness repos covered: openai/codex (8), anomalyco/opencode (8), anthropics/claude-code (3), QwenLM/qwen-code (3), google-gemini/gemini-cli (2), OpenHands/OpenHands (2), aaif-goose/goose (2), and one each from continuedev/continue, cline/cline, Kilo-Org/kilocode, SWE-agent/SWE-agent.
+Harness repos covered: openai/codex (7), anomalyco/opencode (8), anthropics/claude-code (3), QwenLM/qwen-code (3), google-gemini/gemini-cli (2), OpenHands/OpenHands (2), aaif-goose/goose (2), and one each from continuedev/continue, cline/cline, Kilo-Org/kilocode, SWE-agent/SWE-agent.
 
 ## Schema (`data/cases.jsonl`)
 | Field | Type | Description |
@@ -65,11 +66,11 @@ Harness repos covered: openai/codex (8), anomalyco/opencode (8), anthropics/clau
 | notes | string | Provenance, redactions, unverified points, reproduction details |
 
 ## Failure taxonomy (subtypes)
-| Subtype | Definition | v0.2 count |
+| Subtype | Definition | v0.2.2 count |
 |---|---|---|
 | wrong-args | The tool exists, but the arguments are malformed, of the wrong type, missing required fields, invented, or wrong for the environment | 19 |
 | nonexistent-tool | The agent calls a tool name that is not advertised, either hallucinated or carried over from another harness | 8 |
-| ignored-error | The tool returns an error, and the agent ignores it, repeats the call, or claims success anyway | 4 |
+| ignored-error | The tool returns an error, and the agent ignores it, repeats the call, or claims success anyway | 3 |
 | wrong-channel | A tool call is emitted as plain text or markup instead of a structured call, and the agent then reports progress that did not happen | 1 |
 | data-exfiltration | The agent places personal or private data from its context into an outbound tool call (a request header, URL or payload) against an instruction or without the user's consent | 0 |
 | other | Anything that fits none of the subtypes above | 0 |
@@ -104,7 +105,6 @@ Nothing in v0.2 has been reproduced end-to-end with a model. "Harness-confirmed"
 | AFE-0004 | openai/codex | wrong-args | medium | blocked - requires Windows (PowerShell + ripgrep); not reproducible on Linux |
 | AFE-0005 | cline/cline | wrong-args | medium | not attempted |
 | AFE-0010 | openai/codex | nonexistent-tool | high | not attempted |
-| AFE-0011 | openai/codex | ignored-error | high | blocked - requires OpenAI access to gpt-5.6-luna/terra via Codex CLI; failure is a model omission, cannot be mocked |
 | AFE-0013 | openai/codex | ignored-error | medium | not attempted |
 | AFE-0014 | anomalyco/opencode | wrong-args | medium | harness-confirmed (bad call injected; model behavior not yet re-run) |
 | AFE-0015 | anthropics/claude-code | wrong-args | high | not attempted |
@@ -131,7 +131,7 @@ Nothing in v0.2 has been reproduced end-to-end with a model. "Harness-confirmed"
 | AFE-0042 | openai/codex | wrong-args | low | not attempted |
 | AFE-0043 | anomalyco/opencode | nonexistent-tool | medium | not attempted |
 
-Totals: 8 harness-confirmed (AFE-0022's harness hint defect is fixed upstream; its nonexistent-tool path is still confirmed), 2 blocked, 22 not attempted. The 7 cases added in v0.2 (AFE-0037 to AFE-0043) are all not attempted.
+Totals: 8 harness-confirmed (AFE-0022's harness hint defect is fixed upstream; its nonexistent-tool path is still confirmed), 1 blocked, 22 not attempted. The 7 cases added in v0.2 (AFE-0037 to AFE-0043) are all not attempted.
 
 ## Licensing
 - **Our annotations** (normalization, trajectories as structured, rubrics, rationales, taxonomy, scripts, fixtures README) are released under **CC BY 4.0**. See `LICENSE`.
@@ -143,10 +143,10 @@ Totals: 8 harness-confirmed (AFE-0022's harness hint defect is fixed upstream; i
 - **Partial trajectories:** most cases show only the steps quoted in the issue. Several are a single step, or are aggregated by the reporter (e.g. "15 calls failed").
 - **No model reruns:** no case has been re-observed with the reported model. Harness-confirmed cases only verify the error path.
 - **Version drift:** some harness-confirmed results used newer harness versions than the reports. Error wording differs for AFE-0019 and AFE-0020, and the bad suggestion hint reported in AFE-0022 was fixed upstream in Qwen Code v0.25.0 (QwenLM/qwen-code#12743); results recorded against v0.24.5 or earlier describe the pre-fix harness. Details are in each case's notes.
-- **Skew:** openai/codex and anomalyco/opencode account for 16 of 32 cases. ignored-error (4) and wrong-channel (1) are underrepresented, and data-exfiltration has no cases yet.
+- **Skew:** openai/codex and anomalyco/opencode account for 15 of 31 cases. ignored-error (3) and wrong-channel (1) are underrepresented, and data-exfiltration has no cases yet.
 - **Harness-vs-model ambiguity:** in some cases (e.g. AFE-0003, AFE-0022, AFE-0024, AFE-0042, AFE-0043) the harness contributes to the failure. Cases where the harness clearly dominated were excluded.
 - **Severity** is our judgment, not the reporter's.
-- **Small size (32):** this set is for regression testing and qualitative evaluation, not statistically powered benchmarking.
+- **Small size (31):** this set is for regression testing and qualitative evaluation, not statistically powered benchmarking.
 
 ## Intended use
 - Regression tests for agent harnesses: tool-schema validation, unknown-tool handling, retry and loop guards, error propagation.
@@ -157,11 +157,11 @@ Not intended to rank models on its own, or as evidence about any specific vendor
 
 ## Citation
 ```bibtex
-@misc{agent_failure_evals_tcm_v021,
-  title  = {Agent Failure Evals: Tool-Call Misuse v0.2.1},
+@misc{agent_failure_evals_tcm_v022,
+  title  = {Agent Failure Evals: Tool-Call Misuse v0.2.2},
   author = {Harrelson, Ben},
   year   = {2026},
-  note   = {32 real-world tool-call misuse cases from open-source coding agents},
+  note   = {31 real-world tool-call misuse cases from open-source coding agents},
   howpublished = {\url{https://github.com/faddacake/agent-failure-evals}}
 }
 ```
@@ -170,6 +170,7 @@ Not intended to rank models on its own, or as evidence about any specific vendor
 GitHub: [@faddacake](https://github.com/faddacake) (also open an issue on the dataset repo for change/removal requests: https://github.com/faddacake/agent-failure-evals/issues)
 
 ## Changelog
+- **v0.2.2 (2026-10-26):** correction release; one case withdrawn, no new cases. AFE-0011 (openai/codex#32251) is withdrawn because the source report was a false alarm: the reporter closed it on 2026-07-10 after finding that the gpt-5.6 models did generate the images, through the code-mode path (`tools.image_gen__imagegen` inside an `exec` call), and saved them as `exec-<uuid>.png` rather than the `call_<id>.png` names his check looked for. The case ID is retired and will not be reused; a short note is kept in `withdrawn/AFE-0011.md`. Also fixes AFE-0013's `agent_system` to record the model (gpt-5.6-sol), which the source issue states. Counts: 19 wrong-args, 8 nonexistent-tool, 3 ignored-error, 1 wrong-channel, 0 data-exfiltration, 0 other (31 cases).
 - **v0.2.1 (2026-10-26):** correction and taxonomy release; no new cases (32 cases, same as v0.2). Adds the `wrong-channel` and `data-exfiltration` subtypes to the schema and taxonomy; AFE-0028 moves from `other` to `wrong-channel`. Corrects AFE-0022: the harness hint defect was fixed upstream in Qwen Code v0.25.0 (QwenLM/qwen-code#12743), so the case now grades only the model's recovery; flagged by Qwen Code triage. Counts: 19 wrong-args, 8 nonexistent-tool, 4 ignored-error, 1 wrong-channel, 0 data-exfiltration, 0 other. `scripts/validate.py` accepts the new subtypes and the updated AFE-0022 repro label.
 - **v0.2 (2026-10-21):** adds 7 cases (AFE-0037 to AFE-0043) from a 2026-10-21 sweep of public issues: goose no-op edit reported as success, opencode fabricated subagent `sessionID` and `tools.read` inside Code Mode `execute`, Codex tool call emitted as a compaction summary and `list_threads` limit above an undocumented cap, Qwen Code `tool_call` envelope nested one level too deep and deferred `get_goal` called before schema review. Now 32 cases (19 wrong-args, 8 nonexistent-tool, 4 ignored-error, 1 other). New cases are not attempted for reproduction; fixtures unchanged.
 - **v0.1 (2026-10-15):** first release candidate. 25 cases (15 wrong-args, 6 nonexistent-tool, 3 ignored-error, 1 other); 8 harness-confirmed with replay fixtures.

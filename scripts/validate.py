@@ -13,7 +13,6 @@ ENUM = {"failure_mode": {"tool-call-misuse"},
 REPRO = {"harness-confirmed (bad call injected; model behavior not yet re-run)",
          "harness hint defect fixed upstream in v0.25.0 (QwenLM/qwen-code#12743); nonexistent-tool path confirmed on 0.25.2; model behavior not yet re-run",
          "blocked - requires Windows (PowerShell + ripgrep); not reproducible on Linux",
-         "blocked - requires OpenAI access to gpt-5.6-luna/terra via Codex CLI; failure is a model omission, cannot be mocked",
          "not attempted"}
 CASELIC = {"CC-BY-4.0","paraphrase (link-only attribution); original repo has no detected license"}
 errs, ids = [], set()

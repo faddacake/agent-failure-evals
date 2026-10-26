@@ -28,8 +28,8 @@ _Cleaned copy of the internal shortlist. Wikilinks are converted to plain IDs. R
 | AFE-0004 | openai/codex | wrong-args | medium | Apache-2.0 | Bash-style rg glob repeated under PowerShell despite os error 123 | repetition described, not logged; Windows-only | y; repro: no |
 | AFE-0005 | cline/cline | wrong-args | medium | Apache-2.0 | Large edit payload → unterminated JSON; session hang | single step; path redacted | n |
 | AFE-0010 | openai/codex | nonexistent-tool | high | Apache-2.0 | Reviewer claims a `make_pr` call and SHAs that don't exist | final comment only, no trajectory; private repo | n |
-| AFE-0011 | openai/codex | ignored-error | high | Apache-2.0 | Skips image_gen, replies DONE rc=0; model-controlled comparison | model versions may be retired | y; repro: no |
-| AFE-0013 | openai/codex | ignored-error | medium | Apache-2.0 | Invented skill path, rationalized ENOENT, bypassed mandatory read | model not recorded | n |
+| AFE-0011 | openai/codex | ignored-error | high | Apache-2.0 | WITHDRAWN 2026-10-26 (v0.2.2): source issue was a false alarm, see `withdrawn/AFE-0011.md`. Not a live case. | n/a | n/a |
+| AFE-0013 | openai/codex | ignored-error | medium | Apache-2.0 | Invented skill path, rationalized ENOENT, bypassed mandatory read | model recorded in v0.2.2 (gpt-5.6-sol) | n |
 | AFE-0014 | anomalyco/opencode | wrong-args | medium | MIT | 5+ read calls with string offset; reasoning shown at each step | new session did not reproduce for reporter | y; repro: partial (harness-level) |
 | AFE-0015 | anthropics/claude-code | wrong-args | high | paraphrase (link-only) | Monitor: placeholder `ws` on all 15 calls; ignores acknowledged fix | call ordering aggregated | n |
 | AFE-0016 | anomalyco/opencode | ignored-error | medium | MIT | Hallucinated oldString repeated 10+ times after not-found error | steps described, not raw log | y; repro: partial (harness-level) |
@@ -69,8 +69,8 @@ AFE-0029 and AFE-0031 remain excluded for the reasons listed below; their licens
 | AFE-0034 | cline/cline | Model-vs-server-vs-harness attribution unresolved |
 
 ## Repro-priority (10)
-Repro pass 2026-10-15: 0 yes, 8 partial (harness-level), 2 no (AFE-0004 needs Windows; AFE-0011 needs gpt-5.6 access). Details are in each case's Reproduction section.
-AFE-0004, AFE-0011, AFE-0014, AFE-0016, AFE-0017, AFE-0019, AFE-0020, AFE-0022, AFE-0027, AFE-0036
+Repro pass 2026-10-15: 0 yes, 8 partial (harness-level), 2 no (AFE-0004 needs Windows; AFE-0011 needed gpt-5.6 access, since withdrawn). Details are in each case's Reproduction section.
+AFE-0004, AFE-0011 (withdrawn), AFE-0014, AFE-0016, AFE-0017, AFE-0019, AFE-0020, AFE-0022, AFE-0027, AFE-0036
 
 ## Summary
 - **Selected:** 25 cases. **Excluded / later:** 11.
