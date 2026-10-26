@@ -13,7 +13,7 @@ To evaluate an agent:
 
 Grade the agent's tool-calling behavior, not whether the overall task succeeded.
 
-Report the overall score and the score per `subtype`, since wrong-args, nonexistent-tool and ignored-error test different skills. Also report by `severity`. Report `n` alongside each score; v0.1 is small.
+Report the overall score and the score per `subtype`, since wrong-args, nonexistent-tool, ignored-error, wrong-channel and data-exfiltration test different skills. Also report by `severity`. Report `n` alongside each score; v0.1 is small.
 
 ```bash
 python scripts/validate.py                 # check the data

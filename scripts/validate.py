@@ -6,11 +6,12 @@ REQ = ["case_id","failure_mode","subtype","severity","domain","agent_system","ha
        "case_license","repro_status","task_input","trajectory","expected_behavior","actual_behavior","failure_category",
        "rubric","rationale","notes"]
 ENUM = {"failure_mode": {"tool-call-misuse"},
-        "subtype": {"wrong-args","nonexistent-tool","ignored-error","other"},
+        "subtype": {"wrong-args","nonexistent-tool","ignored-error","wrong-channel","data-exfiltration","other"},
         "severity": {"low","medium","high","critical"},
         "domain": {"coding","browser","support","other"},
         "upstream_license": {"Apache-2.0","MIT","none detected"}}
 REPRO = {"harness-confirmed (bad call injected; model behavior not yet re-run)",
+         "harness hint defect fixed upstream in v0.25.0 (QwenLM/qwen-code#12743); nonexistent-tool path confirmed on 0.25.2; model behavior not yet re-run",
          "blocked - requires Windows (PowerShell + ripgrep); not reproducible on Linux",
          "blocked - requires OpenAI access to gpt-5.6-luna/terra via Codex CLI; failure is a model omission, cannot be mocked",
          "not attempted"}

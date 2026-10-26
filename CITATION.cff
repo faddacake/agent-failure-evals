@@ -1,12 +1,12 @@
 cff-version: 1.2.0
 message: "If you use this dataset, please cite it as below."
-title: "Agent Failure Evals: Tool-Call Misuse v0.2"
+title: "Agent Failure Evals: Tool-Call Misuse v0.2.1"
 type: dataset
 authors:
   - family-names: Harrelson
     given-names: Ben
-version: "0.2"
-date-released: "2026-10-21"
+version: "0.2.1"
+date-released: "2026-10-26"
 license: CC-BY-4.0
 url: "https://github.com/faddacake/agent-failure-evals"
 repository-code: "https://github.com/faddacake/agent-failure-evals"
