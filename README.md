@@ -1,6 +1,6 @@
 ---
 license: cc-by-4.0
-pretty_name: Agent Failure Evals - Tool-Call Misuse v0.2.2
+pretty_name: Agent Failure Evals - Tool-Call Misuse v0.3
 language:
 - en
 task_categories:
@@ -21,17 +21,17 @@ configs:
     path: data/cases.jsonl
 ---
 
-# Agent Failure Evals: Tool-Call Misuse v0.2.2
+# Agent Failure Evals: Tool-Call Misuse v0.3
 
 ## Summary
-31 real-world failures where open-source **coding agents misused tool calls**. Each one comes from a public GitHub issue and is normalized into a single case with: the task, a step-level trajectory, expected vs. actual behavior, a failure category, and a gradeable pass / partial / fail rubric.
+40 real-world failures where open-source **coding agents misused tool calls**. Each one comes from a public GitHub issue and is normalized into a single case with: the task, a step-level trajectory, expected vs. actual behavior, a failure category, and a gradeable pass / partial / fail rubric.
 
-It is aimed at AI labs and agent-harness builders who want small, hand-checked regression cases for tool-calling reliability. This is an early release (v0.2.2, a correction release on top of v0.2.1: 31 cases after one withdrawal). Most trajectories are partial, and no case has been re-run against a model yet (see Caveats).
+It is aimed at AI labs and agent-harness builders who want small, hand-checked regression cases for tool-calling reliability. This is an early release (v0.3: 40 cases, adding 9 to v0.2.2). Most trajectories are partial, and no case has been re-run against a model yet (see Caveats).
 
 ## What's in it
 | Path | Contents |
 |---|---|
-| `data/cases.jsonl` | 31 cases, one JSON object per line (the canonical data) |
+| `data/cases.jsonl` | 40 cases, one JSON object per line (the canonical data) |
 | `cases/AFE-XXXX.md` | Human-readable version of each case |
 | `withdrawn/` | Retired case IDs with the reason for withdrawal (not part of the dataset) |
 | `SHORTLIST.md` | Selection record: chosen cases, excluded cases with reasons |
@@ -66,19 +66,19 @@ Harness repos covered: openai/codex (7), anomalyco/opencode (8), anthropics/clau
 | notes | string | Provenance, redactions, unverified points, reproduction details |
 
 ## Failure taxonomy (subtypes)
-| Subtype | Definition | v0.2.2 count |
+| Subtype | Definition | v0.3 count |
 |---|---|---|
-| wrong-args | The tool exists, but the arguments are malformed, of the wrong type, missing required fields, invented, or wrong for the environment | 19 |
-| nonexistent-tool | The agent calls a tool name that is not advertised, either hallucinated or carried over from another harness | 8 |
-| ignored-error | The tool returns an error, and the agent ignores it, repeats the call, or claims success anyway | 3 |
-| wrong-channel | A tool call is emitted as plain text or markup instead of a structured call, and the agent then reports progress that did not happen | 1 |
-| data-exfiltration | The agent places personal or private data from its context into an outbound tool call (a request header, URL or payload) against an instruction or without the user's consent | 0 |
-| other | Anything that fits none of the subtypes above | 0 |
+| wrong-args | The tool exists, but the arguments are malformed, of the wrong type, missing required fields, invented, or wrong for the environment | 22 |
+| nonexistent-tool | The agent calls a tool name that is not advertised, either hallucinated or carried over from another harness | 9 |
+| ignored-error | The tool returns an error, and the agent ignores it, repeats the call, or claims success anyway | 4 |
+| wrong-channel | A tool call is emitted as plain text or markup instead of a structured call, and the agent then reports progress that did not happen | 3 |
+| data-exfiltration | The agent places personal or private data from its context into an outbound tool call (a request header, URL or payload) against an instruction or without the user's consent | 1 |
+| other | Anything that fits none of the subtypes above | 1 |
 
-Added in v0.2.1: `wrong-channel` (AFE-0028 moved here from `other`) and `data-exfiltration` (no cases in this release; the first is planned for the next one). `other` stays in the schema as a catch-all and is currently empty.
+Added in v0.2.1: `wrong-channel` (AFE-0028 moved here from `other`) and `data-exfiltration` (first case, AFE-0052, added in v0.3). `other` stays in the schema as a catch-all; it holds one case (AFE-0045).
 
 ## Methodology
-- **Sources:** public GitHub issues on open-source coding agents, collected on 2026-10-15 (v0.1) and 2026-10-21 (v0.2) with GitHub search (several query phrasings per repo), then reading full issue bodies and comments.
+- **Sources:** public GitHub issues on open-source coding agents, collected on 2026-10-15 (v0.1), 2026-10-21 (v0.2) and 2026-10-26 (v0.3) with GitHub search (several query phrasings per repo), then reading full issue bodies and comments.
 - **Selection criteria (in order):**
   1. Clearly misuse by the model or agent, not a pure harness bug.
   2. A documented trajectory with real tool calls and errors.
@@ -90,12 +90,13 @@ Added in v0.2.1: `wrong-channel` (AFE-0028 moved here from `other`) and `data-ex
 
   v0.1: 36 cases were drafted; 25 were selected. The other 11 are listed with reasons in `SHORTLIST.md`.
   v0.2: 20 new candidates from a weekly GitHub sweep (2026-10-21) were triaged against the same criteria; 7 were accepted (AFE-0037 to AFE-0043), 9 deferred and 4 rejected.
+  v0.3: 41 candidates from the 2026-10-26 sweep were triaged the same way; 8 were accepted (AFE-0044 to AFE-0051), 13 deferred and 20 rejected. AFE-0052 was added from a separate review of four related claude-code reports.
 - **No invention:** every field comes from the issue text or logs. Unknowns are recorded as `not recorded`, and trajectories include only the steps the source shows.
-- **Paraphrase policy:** the three anthropics/claude-code cases (AFE-0015, AFE-0028, AFE-0035) are entirely our own paraphrase with link-only attribution. An automated check found no run of 8 or more words copied from the source issue. The same check on the 7 v0.2 cases found only identifiers (a source file path and a short error/repro string). Other cases contain short excerpts (error strings, argument snippets), used to identify the failure, plus our own re-description.
+- **Paraphrase policy:** the eight anthropics/claude-code cases (AFE-0015, AFE-0028, AFE-0035, AFE-0044, AFE-0046, AFE-0047, AFE-0051, AFE-0052) are entirely our own paraphrase with link-only attribution. An automated check found no run of 8 or more words copied from the source issue. The same check on the 7 v0.2 cases found only identifiers (a source file path and a short error/repro string), and on the 9 v0.3 cases it found only a pair of dates. Other cases contain short excerpts (error strings, argument snippets), used to identify the failure, plus our own re-description.
 - **Redaction:** personal paths, session and thread IDs, and similar identifiers were removed or replaced with `<redacted>`. Generic sandbox paths quoted in the issues (e.g. `/workspace/...` inside an agent container) were kept.
 
 ## Reproduction status
-Nothing in v0.2 has been reproduced end-to-end with a model. "Harness-confirmed" means we ran the real harness and injected the reported bad tool call through a scripted mock model (or called the parser or tool server directly). We then confirmed the harness rejects it the way the issue describes. It does not mean the model behavior was re-observed.
+Nothing in v0.3 has been reproduced end-to-end with a model. "Harness-confirmed" means we ran the real harness and injected the reported bad tool call through a scripted mock model (or called the parser or tool server directly). We then confirmed the harness rejects it the way the issue describes. It does not mean the model behavior was re-observed.
 
 | case_id | harness_repo | subtype | severity | repro_status |
 |---|---|---|---|---|
@@ -130,23 +131,32 @@ Nothing in v0.2 has been reproduced end-to-end with a model. "Harness-confirmed"
 | AFE-0041 | QwenLM/qwen-code | wrong-args | low | not attempted |
 | AFE-0042 | openai/codex | wrong-args | low | not attempted |
 | AFE-0043 | anomalyco/opencode | nonexistent-tool | medium | not attempted |
+| AFE-0044 | anthropics/claude-code | ignored-error | high | not attempted |
+| AFE-0045 | anomalyco/opencode | other | medium | not attempted |
+| AFE-0046 | anthropics/claude-code | wrong-args | high | not attempted |
+| AFE-0047 | anthropics/claude-code | nonexistent-tool | low | not attempted |
+| AFE-0048 | OpenHands/OpenHands | wrong-args | low | not attempted |
+| AFE-0049 | anomalyco/opencode | wrong-channel | medium | not attempted |
+| AFE-0050 | cline/cline | wrong-channel | medium | not attempted |
+| AFE-0051 | anthropics/claude-code | wrong-args | low | not attempted |
+| AFE-0052 | anthropics/claude-code | data-exfiltration | high | not attempted |
 
-Totals: 8 harness-confirmed (AFE-0022's harness hint defect is fixed upstream; its nonexistent-tool path is still confirmed), 1 blocked, 22 not attempted. The 7 cases added in v0.2 (AFE-0037 to AFE-0043) are all not attempted.
+Totals: 8 harness-confirmed (AFE-0022's harness hint defect is fixed upstream; its nonexistent-tool path is still confirmed), 1 blocked, 31 not attempted. The cases added in v0.2 (AFE-0037 to AFE-0043) and v0.3 (AFE-0044 to AFE-0052) are all not attempted.
 
 ## Licensing
 - **Our annotations** (normalization, trajectories as structured, rubrics, rationales, taxonomy, scripts, fixtures README) are released under **CC BY 4.0**. See `LICENSE`.
-- **Upstream:** each case records its harness repo's license in `upstream_license` (Apache-2.0 for 17 cases, MIT for 12). That license covers the repository's code. It does not necessarily cover the issue text, which is posted by users under GitHub's terms. We link each source issue rather than copying it wholesale, and we quote only short identifying excerpts.
-- **anthropics/claude-code** (no license detected): AFE-0015, AFE-0028 and AFE-0035 are original paraphrases, labeled `paraphrase (link-only attribution); original repo has no detected license`.
+- **Upstream:** each case records its harness repo's license in `upstream_license` (Apache-2.0 for 17 cases, MIT for 15, none detected for 8). That license covers the repository's code. It does not necessarily cover the issue text, which is posted by users under GitHub's terms. We link each source issue rather than copying it wholesale, and we quote only short identifying excerpts.
+- **anthropics/claude-code** (no license detected): AFE-0015, AFE-0028, AFE-0035, AFE-0044, AFE-0046, AFE-0047, AFE-0051 and AFE-0052 are original paraphrases, labeled `paraphrase (link-only attribution); original repo has no detected license`.
 - If you are an issue author and want a case changed or removed, contact us (below) or open an issue at https://github.com/faddacake/agent-failure-evals/issues.
 
 ## Caveats and limitations
 - **Partial trajectories:** most cases show only the steps quoted in the issue. Several are a single step, or are aggregated by the reporter (e.g. "15 calls failed").
 - **No model reruns:** no case has been re-observed with the reported model. Harness-confirmed cases only verify the error path.
 - **Version drift:** some harness-confirmed results used newer harness versions than the reports. Error wording differs for AFE-0019 and AFE-0020, and the bad suggestion hint reported in AFE-0022 was fixed upstream in Qwen Code v0.25.0 (QwenLM/qwen-code#12743); results recorded against v0.24.5 or earlier describe the pre-fix harness. Details are in each case's notes.
-- **Skew:** openai/codex and anomalyco/opencode account for 15 of 31 cases. ignored-error (3) and wrong-channel (1) are underrepresented, and data-exfiltration has no cases yet.
+- **Skew:** anomalyco/opencode, anthropics/claude-code and openai/codex account for 25 of 40 cases. ignored-error (4), wrong-channel (3), data-exfiltration (1) and other (1) are underrepresented.
 - **Harness-vs-model ambiguity:** in some cases (e.g. AFE-0003, AFE-0022, AFE-0024, AFE-0042, AFE-0043) the harness contributes to the failure. Cases where the harness clearly dominated were excluded.
 - **Severity** is our judgment, not the reporter's.
-- **Small size (31):** this set is for regression testing and qualitative evaluation, not statistically powered benchmarking.
+- **Small size (40):** this set is for regression testing and qualitative evaluation, not statistically powered benchmarking.
 
 ## Intended use
 - Regression tests for agent harnesses: tool-schema validation, unknown-tool handling, retry and loop guards, error propagation.
@@ -157,11 +167,11 @@ Not intended to rank models on its own, or as evidence about any specific vendor
 
 ## Citation
 ```bibtex
-@misc{agent_failure_evals_tcm_v022,
-  title  = {Agent Failure Evals: Tool-Call Misuse v0.2.2},
+@misc{agent_failure_evals_tcm_v03,
+  title  = {Agent Failure Evals: Tool-Call Misuse v0.3},
   author = {Harrelson, Ben},
   year   = {2026},
-  note   = {31 real-world tool-call misuse cases from open-source coding agents},
+  note   = {40 real-world tool-call misuse cases from open-source coding agents},
   howpublished = {\url{https://github.com/faddacake/agent-failure-evals}}
 }
 ```
@@ -170,6 +180,7 @@ Not intended to rank models on its own, or as evidence about any specific vendor
 GitHub: [@faddacake](https://github.com/faddacake) (also open an issue on the dataset repo for change/removal requests: https://github.com/faddacake/agent-failure-evals/issues)
 
 ## Changelog
+- **v0.3 (2026-10-31):** adds 9 cases (AFE-0044 to AFE-0052), 8 from the 2026-10-26 weekly sweep plus one from a review of related reports. By harness: anthropics/claude-code 5 (AFE-0044, AFE-0046, AFE-0047, AFE-0051, AFE-0052; all link-only paraphrase), anomalyco/opencode 2 (AFE-0045, AFE-0049), OpenHands/OpenHands 1 (AFE-0048), cline/cline 1 (AFE-0050). By subtype: wrong-args 3, wrong-channel 2, ignored-error 1, nonexistent-tool 1, data-exfiltration 1 (the first case of this subtype: AFE-0052, account email placed in the User-Agent of outbound curl requests), other 1. All new cases are not attempted for reproduction; fixtures unchanged. Also corrects the upstream license tally in Licensing and one spelling (AFE-0001). Counts: 22 wrong-args, 9 nonexistent-tool, 4 ignored-error, 3 wrong-channel, 1 data-exfiltration, 1 other (40 cases).
 - **v0.2.2 (2026-10-26):** correction release; one case withdrawn, no new cases. AFE-0011 (openai/codex#32251) is withdrawn because the source report was a false alarm: the reporter closed it on 2026-07-10 after finding that the gpt-5.6 models did generate the images, through the code-mode path (`tools.image_gen__imagegen` inside an `exec` call), and saved them as `exec-<uuid>.png` rather than the `call_<id>.png` names his check looked for. The case ID is retired and will not be reused; a short note is kept in `withdrawn/AFE-0011.md`. Also fixes AFE-0013's `agent_system` to record the model (gpt-5.6-sol), which the source issue states. Counts: 19 wrong-args, 8 nonexistent-tool, 3 ignored-error, 1 wrong-channel, 0 data-exfiltration, 0 other (31 cases).
 - **v0.2.1 (2026-10-26):** correction and taxonomy release; no new cases (32 cases, same as v0.2). Adds the `wrong-channel` and `data-exfiltration` subtypes to the schema and taxonomy; AFE-0028 moves from `other` to `wrong-channel`. Corrects AFE-0022: the harness hint defect was fixed upstream in Qwen Code v0.25.0 (QwenLM/qwen-code#12743), so the case now grades only the model's recovery; flagged by Qwen Code triage. Counts: 19 wrong-args, 8 nonexistent-tool, 4 ignored-error, 1 wrong-channel, 0 data-exfiltration, 0 other. `scripts/validate.py` accepts the new subtypes and the updated AFE-0022 repro label.
 - **v0.2 (2026-10-21):** adds 7 cases (AFE-0037 to AFE-0043) from a 2026-10-21 sweep of public issues: goose no-op edit reported as success, opencode fabricated subagent `sessionID` and `tools.read` inside Code Mode `execute`, Codex tool call emitted as a compaction summary and `list_threads` limit above an undocumented cap, Qwen Code `tool_call` envelope nested one level too deep and deferred `get_goal` called before schema review. Now 32 cases (19 wrong-args, 8 nonexistent-tool, 4 ignored-error, 1 other). New cases are not attempted for reproduction; fixtures unchanged.

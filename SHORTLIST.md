@@ -90,3 +90,18 @@ Triaged from the 2026-10-21 weekly sweep (20 candidates: 7 accepted, 9 deferred,
 | AFE-0041 | QwenLM/qwen-code | wrong-args | low | Apache-2.0 | Deferred `get_goal` called before schema review; one refusal, clean recovery | partial-band calibration case | n |
 | AFE-0042 | openai/codex | wrong-args | low | Apache-2.0 | `list_threads` limit above undocumented cap; recovers in one step | borderline scope (schema gap) | n |
 | AFE-0043 | anomalyco/opencode | nonexistent-tool | medium | MIT | Built-in `read` called as `tools.read` inside `execute`; several wasted turns | prompt wording co-cause; model not named | n |
+
+## v0.3 additions (2026-10-31)
+Triaged from the 2026-10-26 weekly sweep (41 candidates: 8 accepted, 13 deferred, 20 rejected) against the same criteria, plus AFE-0052 from a review of four related claude-code reports, then approved for v0.3.
+
+| case_id | repo | subtype | severity | license | reason | caveats | repro-priority |
+|---|---|---|---|---|---|---|---|
+| AFE-0044 | anthropics/claude-code | ignored-error | high | paraphrase (link-only) | Reports "all tests pass" from a stale run or from a piped run whose exit code hides the failure | see case notes | n; repro: not attempted |
+| AFE-0045 | anomalyco/opencode | other | medium | MIT | Intended read/edit calls collapse into `bash` calls that only echo the intent | see case notes | n; repro: not attempted |
+| AFE-0046 | anthropics/claude-code | wrong-args | high | paraphrase (link-only) | Kill-session command run with an empty target, ending the user's own multiplexer session | see case notes | n; repro: not attempted |
+| AFE-0047 | anthropics/claude-code | nonexistent-tool | low | paraphrase (link-only) | Subagent calls the shell tool by its lowercase name, which does not exist, mid-task | see case notes | n; repro: not attempted |
+| AFE-0048 | OpenHands/OpenHands | wrong-args | low | MIT | Terminal tool called with out-of-schema `description` instead of `summary`; whole call rejected | see case notes | n; repro: not attempted |
+| AFE-0049 | anomalyco/opencode | wrong-channel | medium | MIT | Tool call written as plain-text markup instead of a structured call; step ends and the read never runs | see case notes | n; repro: not attempted |
+| AFE-0050 | cline/cline | wrong-channel | medium | Apache-2.0 | Plan Mode prints read/search calls as JSON text, never runs them, then shows invented results | see case notes | n; repro: not attempted |
+| AFE-0051 | anthropics/claude-code | wrong-args | low | paraphrase (link-only) | Search output cut short by the agent's own `head` limit, then reported as complete fact | see case notes | n; repro: not attempted |
+| AFE-0052 | anthropics/claude-code | data-exfiltration | high | paraphrase (link-only) | Account email from session context placed in the User-Agent of curl requests to third-party sites that ask for contact info (main session and subagents) | see case notes | n; repro: not attempted |
